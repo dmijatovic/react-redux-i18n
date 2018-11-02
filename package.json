@@ -1,0 +1,84 @@
+{
+  "name": "react-i18n-starter",
+  "version": "2.0.0",
+  "description": "React webpack 4 babel 7 starter",
+  "main": "webpack.config.js",
+  "scripts": {
+    "start": "webpack --watch --env=dev",
+    "dev": "webpack-dev-server --env=dev",
+    "build:dev": "webpack --env=dev",
+    "build": "webpack --env=prod"
+  },
+  "keywords": [
+    "react",
+    "webpack 4",
+    "babel 7",
+    "scss"
+  ],
+  "author": "Dusan Mijatovic, dv4all",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-decorators": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "autoprefixer": "^9.1.5",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.3",
+    "css-loader": "^1.0.0",
+    "cssnano": "^4.1.4",
+    "eslint": "^5.7.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.4",
+    "node-sass": "^4.9.3",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss": "^7.0.5",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.1.1",
+    "sass-loader": "^7.1.0",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.20.2",
+    "webpack-bundle-analyzer": "^3.0.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/?(*.)(spec|test).{js,jsx}"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.(scss|css)$": "<rootDir>/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|mjs|css|json|svg|png)$)": "<rootDir>/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
+    ]
+  },
+  "browserslist": [
+    "last 2 version",
+    "> 1%",
+    "not IE 10"
+  ],
+  "browserslist-2": [
+    "> 0.25%"
+  ]
+}

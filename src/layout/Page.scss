@@ -1,0 +1,17 @@
+/*
+  Footer.scss
+  v.0.0.1
+*/
+
+.page{
+  &-body{
+    flex: 1;
+    display:flex;
+    flex-direction: column;
+    margin: 1rem auto;
+    padding: 2rem 1rem;
+    background-color:var(--color-light-0);
+    width: var(--body-content-width);
+    box-shadow: var(--box-shadow-3);
+  }
+}

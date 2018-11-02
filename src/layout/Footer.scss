@@ -1,0 +1,30 @@
+/*
+  Footer.scss
+  v.0.0.1
+*/
+
+.app{
+  &-footer{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &-footer-body{
+    display:flex;
+    padding: 1rem 0rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: var(--body-content-width);
+  }
+}
+
+.footer{
+  &-left{
+    display:flex;
+    font-size: 1rem;
+  }
+  &-right{
+    display:flex;
+    font-size: 0.7rem;
+  }
+}
