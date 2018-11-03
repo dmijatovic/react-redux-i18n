@@ -40,7 +40,7 @@ export const cfg = {
       icon:'img/us.svg'
     },{
       key:'nl',
-      label:'Dutch',
+      label:'Nederlands',
       data:'data/nl.json',
       icon:'img/nl.svg'
     },{
