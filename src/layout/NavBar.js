@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { NavLink  } from 'react-router-dom';
-import { Clock } from '../component';
+import { Clock, Language } from '../component';
 import './NavBar.scss';
 import routes from '../router/routes';
 
@@ -36,6 +36,8 @@ class NavBar extends Component {
           </ul>
 
           <Clock/>
+
+          <Language/>
 
         </section>
       </nav>

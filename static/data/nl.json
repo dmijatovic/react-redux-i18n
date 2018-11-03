@@ -1,4 +1,10 @@
 {
-  "header.appTitle":"Deze titel komt uit i18n",
-  "header.pageTitle":"Even wachten om pagina te laden :-)"
+  "Header.appTitle":"Deze titel komt uit i18n",
+  "Header.pageTitle":"",
+  "Footer.left":"Tekst aan de linkerzijde",
+  "Footer.right":"Tekst aan rechts",
+  "Home.pageTitle":"Home page - translated ",
+  "About.pageTitle":"About page - translated ",
+  "Message.Loading":"Wachten op pagina to load...",
+  "Message.Error.General":"Het is niet gelukt :-("
 }

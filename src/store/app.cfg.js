@@ -3,13 +3,15 @@
  * Inital app configuration
  * note! the values are imported inyo redux store
  */
-export const Config = {
+export const cfg = {
   header:{
     logo:{
       src:'img/dv4all_logo_v7_2016_hd.svg'
     },
-    appTitle:'This is app title received from Redux',
-    pageTitle: "Wait for page to load..."
+    //these will be translated in redux middleware
+    //see middleware.getTranslation
+    // appTitle:null,
+    // pageTitle:null
   },
   //clock inital values
   clock: {
@@ -27,8 +29,11 @@ export const Config = {
   },
   //internationalization
   i18n:{
-    defaultLang:'nl',
-    lang:[{
+    defaultLang:'en',
+    //localStorage key
+    lsKey:'dv4all.app.lang',
+    //list of languages
+    options:[{
       key:'en',
       label:'English',
       data:'data/en.json'
@@ -36,6 +41,15 @@ export const Config = {
       key:'nl',
       label:'Dutch',
       data:'data/nl.json'
-    }]
+    }],
+    //current language info goes here
+    //see languageReducer for implementation
+    lang:{
+      key:null,
+      label:null,
+      data:null
+    }
   }
 }
+
+export default cfg;

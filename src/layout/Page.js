@@ -9,14 +9,6 @@ import { Header, NavBar, Footer } from './index';
 import { logGroup } from '../utils';
 import './Page.scss';
 
-//import TransContext from '../context/TransContext';
-//import { logGroup } from '../utils';
-/*
-import { trans } from '../context/translate';
-const t = new trans();
-const ln = t.getLanguage();
-*/
-
 /**
  * Page component
  * @param {String} props.title pass title tot header title prop
@@ -32,9 +24,11 @@ const Page = props => {
   return (
     <BrowserRouter>
       <React.Fragment>
-        <Header key="header"
+        <Header
+          key="header"
           appTitle={props.appTitle}
-          pageTitle={props.pageTitle}/>
+          pageTitle={props.pageTitle}
+          languages={props.languages}/>
         <NavBar/>
         <article
           key="body"
@@ -45,8 +39,8 @@ const Page = props => {
         </article>
         <Footer
           key="footer"
-          left="Text to show on left side"
-          right="text on the right"
+          left={props.footerLeft}
+          right={props.footerRight}
         />
       </React.Fragment>
     </BrowserRouter>
@@ -60,15 +54,24 @@ const Page = props => {
  */
 const mapStateToProps = state => {
   //debugger
-  if (state.lang){
+  //get translations from i18n reducer
+  let { data } = state.i18n.lang;
+  if (data){
+    //debugger
     return{
-      appTitle: state.lang.data['header.appTitle'],
-      pageTitle: state.lang.data['header.pageTitle']
+      //this prop is dynamically updated by pages
+      pageTitle: state.header.pageTitle,
+      appTitle: data['Header.appTitle'],
+      footerLeft: data['Footer.left'],
+      footerRight: data['Footer.right'],
+      languages: state.i18n.options
     }
   }else{
+    //debugger
     return{
-      appTitle: null,
-      pageTitle: null
+      appTitle: state.header.appTitle,
+      pageTitle: state.header.pageTitle,
+      languages: state.i18n.options
     }
   }
 }

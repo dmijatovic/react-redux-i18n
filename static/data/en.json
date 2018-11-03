@@ -1,4 +1,10 @@
 {
-  "header.appTitle":"This is app title received from i18n",
-  "header.pageTitle":"Waiting for page to load..."
+  "Header.appTitle":"This is app title received from i18n",
+  "Header.pageTitle":"Default page title",
+  "Footer.left":"Text to show left",
+  "Footer.right":"Text to show on right",
+  "Home.pageTitle":"Home page",
+  "About.pageTitle":"About page",
+  "Message.Loading":"Waiting for page to load...",
+  "Message.Error.General":"Failed to accomplish task :-("
 }

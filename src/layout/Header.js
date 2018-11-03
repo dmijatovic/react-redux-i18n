@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './Header.scss';
 
-import TransContext from '../context/TransContext';
+//import TransContext from '../context/TransContext';
 import { logGroup } from '../utils';
 
 /**
@@ -43,6 +43,6 @@ export class Header extends Component {
   }
 }
 //get context
-Header.contextType = TransContext;
+//Header.contextType = TransContext;
 
 export default Header;

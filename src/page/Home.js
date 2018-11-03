@@ -56,8 +56,6 @@ export class Home extends React.Component{
       state: this.state,
       props: this.props
     })
-    //set page title
-    this.props.setPageTitle("Home page");
     //first show loader
     this.showLoader()
     //change loader state after 2 seconds
@@ -74,6 +72,10 @@ export class Home extends React.Component{
       state: this.state,
       props: this.props
     })
+    //update page title in Header
+    if (this.props.pageTitle){
+      this.props.setPageTitle(this.props.pageTitle);
+    }
   }
 }
 
@@ -84,9 +86,18 @@ export class Home extends React.Component{
  */
 const mapStateToProps = state => {
   //debugger
-  return {
-    pageTitle: state.header.pageTitle,
-    loader: state.loader
+  //get translations from i18n reducer
+  let { data } = state.i18n.lang;
+  if (data){
+    return {
+      pageTitle: data['Home.pageTitle'],
+      loader: state.loader
+    }
+  }else{
+    return {
+      //pageTitle: state.header.pageTitle,
+      loader: state.loader
+    }
   }
 }
 /**

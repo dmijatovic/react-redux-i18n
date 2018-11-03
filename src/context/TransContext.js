@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 //esling-disable-next-line
 import { logGroup } from '../utils';
-import { Config as cfg } from '../store/app.cfg';
+import cfg from '../store/app.cfg';
 
 class TransContext extends Component {
   state={

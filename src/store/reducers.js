@@ -1,18 +1,15 @@
 
-import { Config } from './app.cfg';
+import cfg from './app.cfg';
 import * as actionType from './actions';
 //eslint-disable-next-line
 import { logGroup } from '../utils';
-
-
-const initialState=Config;
 
 /**
  * Manage the loader states using redux store
  * @param state: object, current redux store state of loader store
  * @param action: object, dispatched redux action
  */
-export const loaderReducer = (state=initialState.loader,action)=>{
+export const loaderReducer = (state=cfg.loader,action)=>{
   //just for fun use lowercased action types
   switch (action.type){
     case actionType.SHOW_LOADER:
@@ -37,7 +34,7 @@ export const loaderReducer = (state=initialState.loader,action)=>{
   }
 }
 
-export const headerReducer = (state = initialState.header, action) => {
+export const headerReducer = (state = cfg.header, action) => {
   //log action comming into reducer
   // logGroup({
   //   title:"headerReducer",
@@ -76,7 +73,6 @@ export const personsReducer = (state=[], action)=>{
   //   state: state,
   //   action: action
   // });
-
   switch (action.type){
     case actionType.ADD_PERSON:
       //use concat with arrays
@@ -126,7 +122,14 @@ export const apiDataReducer = (state = {}, action) => {
   }
 }
 
-export const languageReducer = (state = null, action) => {
+/**
+ * Language reducer containing lang info and translations
+ * @param {object} state previous state object
+ * @param {object} action redux action with type and payload
+ * @param {string} action.type redux action type, string constant
+ * @param {object} action.payload redux action type, string constant
+ */
+export const languageReducer = (state = cfg.i18n, action) => {
   /*logGroup({
     title:'filterReducer',
     action: action,
@@ -134,10 +137,22 @@ export const languageReducer = (state = null, action) => {
   });*/
   //debugger
   switch (action.type){
-    case actionType.SET_LANGUAGE:
+    case actionType.SET_LANG_OK:
+    case actionType.SET_LANG_ERR:
+      //debugger
       return {
         ...state,
-        ...action.payload
+        lang:{
+          ...action.payload
+        }
+      }
+    case actionType.SET_LANG_LIST:
+      //debugger
+      return {
+        ...state,
+        options:[
+          ...action.payload
+        ]
       }
     //always return state
     //to continue 'event' chain

@@ -8,16 +8,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import appStore from './store';
 
-//INITIAL LOCALE LOAD
-import { getLanguage, getTranslations } from './store/locale';
-
-let ln = getLanguage();
-
-getTranslations({
-  lang: ln,
-  dispatch: appStore.dispatch
-})
-
+//INITIAL LOAD of locale
+import { initLocale } from './utils';
+initLocale(appStore.dispatch);
 
 //LOCAL - STYLES
 import './styles/index.scss';

@@ -19,9 +19,49 @@ export const asyncFetch = ({getState, dispatch}) =>{
     //   status:"next",
     //   action: action
     // })
-    //look for specific action type
+    //look for specific action types
     //debugger
     switch(action.type){
+      //get translations
+      case actionType.GET_LANGUAGE:
+        //change action to show loader
+        /*next ({
+          type: actionType.SHOW_LOADER,
+        })*/
+        //load translations
+        fetchTranslations(action.payload.data)
+        .then(t => {
+          //debugger
+          //emit action to set new language
+          next({
+            type: actionType.SET_LANG_OK,
+            payload:{
+              ...action.payload,
+              data: t
+            }
+          })
+          //hide loader
+          /*next ({
+            type: actionType.HIDE_LOADER
+          })*/
+        })
+        .catch(err => {
+          //debugger
+          next({
+            type: actionType.SET_LANG_ERR,
+            payload:{
+              ...action.payload,
+              data: null,
+              error: err
+            }
+          });
+          //hide loader
+          /*next ({
+            type: actionType.HIDE_LOADER
+          })*/
+        })
+        break;
+      //fetch data from API
       case actionType.API_DATA_GET:
         //change action to show loader
         next ({
@@ -41,7 +81,7 @@ export const asyncFetch = ({getState, dispatch}) =>{
           //return OK to hide loader
           return true;
         })
-        .then(ok=>{
+        .then(ok => {
           //hide loader
           next ({
             type: actionType.HIDE_LOADER
@@ -68,6 +108,23 @@ export const asyncFetch = ({getState, dispatch}) =>{
   }
 }
 
+
+/**
+ * Load translation json file
+ * @param {string} url
+ */
+function fetchTranslations(url){
+  return fetch(url)
+  .then(resp => {
+    //debugger
+    return resp.json();
+  })
+  .catch(e => {
+    throw e;
+  })
+}
+
+
 /**
  * Format response to add actionId into
  * data object.
@@ -88,9 +145,8 @@ function prepPayload( id, data, error = null ){
 }
 
 
-
 /**
- * Async function that fetchData from api using fetchAPI
+ * Async function that fetches data from api using fetchAPI
  * info is pulled from definitions stored in config (app.cfg.js)
  */
 function fetchData (action) {
@@ -126,13 +182,68 @@ function fetchData (action) {
     })
 }
 
+export const getTranslation = ({ getState, dispatch }) => {
+  // logGroup({
+  //   title:"redux.middleware",
+  //   method:"getTranslation",
+  //   status:"enter"
+  // })
+  return next => action => {
+    // logGroup({
+    //   title:"redux.middleware",
+    //   method:"getTranslation",
+    //   status:"next",
+    //   action: action
+    // })
+     // })
+    //look for specific action types
+    switch(action.type){
+      //get translations
+      case actionType.SET_APP_TITLE:
+      case actionType.SET_PAGE_TITLE:
+        debugger
+        //do we need to translate?
+        if (action.payload.translate){
+          //get redux state
+          //returns complete store
+          let state = getState();
+          //extract translations
+          let {lang} = state.i18n;
+          //do we have data?
+          if (lang.data){
+            //extract translation
+            let trans = lang.data[action.payload.key]
+            if (trans){
+              next({
+                type: action.type,
+                payload: trans
+              })
+            }else{
+              //next(action);
+            }
+          }else{
+            //next(action);
+          }
+        }else{
+          //translation not required
+          next(action);
+        }
+        //console.log(store);
+        break;
+      default:
+        //call next to continue the chain
+        next(action);
+    }
+  }
+}
+
 
 /**
  * Custom middleware function that simply logs when called,
  * it should return next(action) function
  * and call it to continue action 'chain' and reach the reducer
  * note! if next(action) is not called the chain will break and action
- * will never reach the reducer which is the function of middleware
+ * will never reach the reducer
  * @param param.getState: fn, received from redux
  * @param param.dispatch: fn, received from redux
  */
