@@ -1,7 +1,6 @@
-# React webpack 4 i18n starter template
+# React-redux-custom-i18n demo
 
-This is webpack 4 starter with scss enabled and babel version 7. It tests use of ContextAPI for handling localization. It is continuation of [react-w4-starter](https://github.com/dmijatovic/react-webpack4-starter). For the basic setup please look at that repo. This repo will focus on ContextAPI used for i18n.
-
+This is webpack 4 starter with scss enabled, babel version 7 and redux. It test use of redux and custom json files for handling localization. The project is continuation of [react-w4-starter](https://github.com/dmijatovic/react-webpack4-starter). For explanation about basic setup look at that repo. This repo focus is on custom redux translation approach I plan to use.
 
 ## NPM scripts
 
@@ -10,176 +9,97 @@ This is webpack 4 starter with scss enabled and babel version 7. It tests use of
 - `npm run build:dev:` Build development version.
 - `npm run build:` Build production version to dist folder. Note that previous build will be removed first.
 
+## Translations
 
-## Context API for i18n
+This repo uses redux and custom middleware to load json file with translations of the content and components.
 
-The idea is to use ContextAPI to load the translations.
+### How to add language?
 
-
-
-
-
-
-
-
-## Webpack config scripts
-
-Webpack configuration is stored in webpack folder. Initially 2 separate def files are created. Based on --env parameter passed on init one of the configuration files is loaded as webpack config module (see webpack.config.js)
-
-- `dev:` this is development environment setup (webpack/dev.js)
-- `prod:` this is production build setup (webpack/prod.js).
-
-**Note! Configuration is not 'shared' between files. When updating, please adjust/update the properties in both files where needed.**
-
-BTW: I have chosen here simpler approach with some code duplication above more complex setup (without code duplication).
-
-## Folder Structure
-
-- **`assets`**: all asset files used like original logo and other images etc. Excel template for creating json files is also here.
-- **`dist`**: builds are here
-- **`src`**: holds all react code to be processed by webpack. **All js/css files need to be inside `src` folder**, otherwise Webpack won’t see them.
-  - **component**: holds shared/general react components used by multiple pages
-  - **layout**: holds react components which define global page layout
-  - **page**: holds react components that represent pages (uniek in design/composition)
-  - **router**: holds defined routes, react router setup and main router component. This router component is then integrated into main/global layout component.
-  - **store**: holds all redux files used to setup redux store including implementation of custom middleware functions.
-  - **styles**: holds css (js possible too) files related to defining global styles, overrides, css variables etc.
-  - **utils**: holds uitility function
-- **static**: static files that will be included in the build
-- **webpack**: webpack configuration file from react-scipts
-
-## Git branches
-
-Master will have same content as base setup.
-
-- master: same as base.
-- dev: development branch
-
-## Setup gotcha's :-)
-
-### Webpack plugins
-
-Some plugins depend on the other webpack or third party plugins. In some cases it is not sufficient to use only webpack plugin! Examples
-
-- url-loader depends on file-loader at the moment you set the limit on file size that can be added as base64 into js file.
-- postcss-loader depends on third party poscss module which in turns is collection of hondrets of modules that need to be 'pulled' separately. For example if you want to apply autoprefixing through webpack you need: postcss, postcss-loader and autoprefixer.
-- babel polyfill need to be project dependency as it is shipped with the project.
-- for IE 11 support you need additional polyfills to support fetch "whatwg-fetch" and include it in index.js as first import
-- for IE 11 you need also need to include @babel/polyfill
-- for IE 11 to have autoperfixer add values for all CSS variables you need to import index.scss file into index not index.js that imports other scss files; this seem not to work?
-
-```javascript
-  //at the top of index.js file, before react add
-  //import fetch polyfill
-  import 'whatwg-fetch';
-  //polyfills
-  import '@babel/polyfill';
-  //import APP styles firs (if extracted to separate file)
-  import './styles';
-
-```
-
-### Webpack dev server and history router
-
-Ensure dev server has url rewrites defined. On 'normal' server this setting is required. Also with webpack dev server the flag need to be set to true!
-
-```javascript
-  devServer: {
-    historyApiFallback: true,
-  },
-```
-
-### Browser support
-
-To provide support for various browsers javasript as well as CSS need to be transpiled to legacy code. To share the information about the required browser support among different modules and plugins the [browserlist](https://browserl.ist/?q=last+2+version%2C%3E+1%25%2Cnot+IE+10) is invented. So far I only got this working as prop in package.json although there are number of different ways to expose the configuration to different plugins/modules/bundlers/transpilers etc.
+- **create translation file**: create new json file based on the default json file en.json at the same location (static/data/en.json). The filename needs to be defined in the config file (see point 3). Go to google translate and translate all items :-). *Maybe we can use Google Translate API?!? When double-quotes (") appear in the text use escape chart (\\). See example below.*
 
 ```json
-  "browserslist": [
-    "last 2 version",
-    "> 1%",
-    "not IE 10"
-  ]
-```
-
-To validate things work properly run
-
-```bash
-   # check browser list for post-css autoprefixer
-   npx browserslist
-```
-
-### [ESLint](https://eslint.org/docs/user-guide/configuring)
-
-ESLint requires configuration file. The preference is to have .eslintrc file defined per project in order to tweak the rules.
-Basic setup is perfomed based on this [video](https://www.youtube.com/watch?v=nxxl2H_TOTc&list=PLMWjeRChIK6bnp6qaS3rxLGCpc9aQYzEE)
-
-Beside eslint we need to use react plugin eslint-plugin-react.
-
-```bash
-  # ESlint setup for react
-  npm i -D eslint babel-eslint eslint-plugin-react
-```
-
-```js
   {
-    //extends basic eslint recommendations and react
-    "extends": ["eslint:recommended","plugin:react/recommended"],
-    //use babel plugin
-    "parser": "babel-eslint",
-    //parser ECMA version 7
-    "parserOptions": {
-      "ecmaVersion": 7,
-      //using classes
-      "sourceType": "module",
-      //enable react features
-      "ecmaFeatures": {
-        "jsx": true
-      }
-    },
-    //environments
-    "env": {
-      "node":true,
-      "browser": true,
-      "jest": true
-    },
-    //customizing default rules
-    "rules": {
-      //warn on used variables but not arguments
-      "no-unused-vars": ["warn",{
-        "args":"none"
-      }],
-      //warn on console.logs
-      "no-console": 1,
-      //no idea what rule is this
-      "no-unexpected-multiline": "warn",
-      //warn on improper propTypes when these are declared
-      "react/prop-types": [1,{"skipUndeclared":true}]
-    }
+    "key":"This text value uses double-quotes \" to quote this text \"."
   }
+```
+
+- **add language icon**: the assets folder contains all country flags as of 2018. We use 4x3 format. Copy svg icon into static/img/ folder. Note that location and file name should be provided in config file under *icon* key (see next point).
+
+- **add language option to config** (store/app.cfg.js): add new options item into options object array. Ensure values of data and icon reflecting actual location (excluding static folder name).
+
+```javascript
+  //---start section of cfg object --
+  i18n:{
+    defaultLang:'en',
+    //localStorage key
+    lsKey:'dv4all.app.lang',
+    //list of languages
+    options:[
+      {
+        key:'en',
+        label:'English',
+        data:'data/en.json',
+        icon:'img/us.svg'
+      },{
+        key:'nl',
+        label:'Dutch',
+        data:'data/nl.json',
+        icon:'img/nl.svg'
+      }
+      /* add new language options here. Ensure values are correct!
+        example new language option:
+          {
+            key:'pl',
+            label:'Polski',
+            data:'data/pl.json',
+            icon:'img/pl.svg'
+          }
+      */
+    ]
+    //... more config here
+  }
+  //---end section of cfg object --
 
 ```
 
-## NPM installation scripts
+### Methods
 
-Just run `npm install` and all libs mentioned below will be installed.
+Script **locale.js (util/locale.js)** performs following operations:
 
-```bash
-  # 1. install react dom
-  npm i -s react react-dom @babel/polyfill
-  # 2. install webpack modules
-  npm i -D webpack webpack-cli webpack-dev-server webpack-bundle-analyzer
-  # 3a. install babel loaders - basics v7
-  npm i -D babel-loader @babel/core @babel/preset-env @babel/preset-react
-  # 3b. install babel loaders - used features v7
-  npm i -D @babel/plugin-proposal-class-properties @babel/plugin-proposal-decorators
-  # 4a. install scss/css loaders - basics
-  npm i -D node-sass sass-loader css-loader mini-css-extract-plugin
-  # 4b. install post-css loaders
-  npm i -D optimize-css-assets-webpack-plugin postcss-loader postcss postcss-preset-env autoprefixer cssnano
-  # 5. install other webpack util plugins
-  npm i -D html-webpack-plugin url-loader file-loader copy-webpack-plugin uglifyjs-webpack-plugin clean-webpack-plugin
-  # 6. ESLint
-  npm i -D eslint babel-eslint eslint-plugin-react
+- `getLanguage(key)`: provided localStorage key the function will try to get users language preference. This is possible for the users that already visited site and did not cleared localStorage. If no prefference value exists in the localStorage we check navigator.language. If navigator language is avaliable in translations we will load it, otherwise we will load default language defined in config file (store/app.cfg.js)
 
+- `setLanguage(key,val)`: this function saves language selected by user. The function is called by redux middleware (store/middleware.js) after json file is loaded.
+
+- `initLocale(dispatch)`: this is initial function called from index.js at the start of application. It will retreive info about which language file should be lodaded and dispatch GET_LANGUAGE action. This action will be intercepted by custom middleware which will fetch json file and on success 'transform' action type into SET_LANG_OK. For the list of language actions see redux actons file (store/actions.js)
+
+Script **middleware.js (store/middleware.js)** holds `asyncFetch` method responsible for loading json file using fetch API. This method will transform 'initial' action type GET_LANGUAGE into 'final' action types SET_LANG_OK or SET_LANG_ERR.
+
+## Add new page
+
+To add new page into this project following steps are required
+
+- **create page component**: at location `src/page/` create new react file.
+- **add page to router**: at location `src/router/routes.js` import you page component and extend route definition.
+
+```javascript
+  //extend routes configuration with your component
+  import NewPage from '../page/NewPage.js'
+
+  const routes=[
+  { path:'/', to: "/home", type:"redirect", props:{ exact:true }},
+  { path:'/home', component: HomePage, label:"Home", type:"component",props:{ exact:true }},
+  { path:'/about', component: AboutPage, label:"About", type:"component",props:{ exact:true }},
+  { path:'/error/:id', component: ErrorPage, props:{ exact:true }, type:"component"},
+  { path:'', to:"/error/404", type:"redirect"},
+  //add your new page to router here
+  { path:'/newpage', component: NewPage, label:"New page", type:"component",props:{ exact:true }},
+]
 ```
+
+## Redux
+
+All redux definitions are in store folder.
+
+### Actions
+
 

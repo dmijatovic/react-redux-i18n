@@ -43,6 +43,11 @@ export const cfg = {
       label:'Dutch',
       data:'data/nl.json',
       icon:'img/nl.svg'
+    },{
+      key:'ru',
+      label:'Русский',
+      data:'data/ru.json',
+      icon:'img/ru.svg'
     }],
     //current language info goes here
     //see languageReducer for implementation
