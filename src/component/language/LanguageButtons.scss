@@ -26,6 +26,13 @@
     }
   }
 
+  &-option:hover:not(.selected){
+    //opacity: 0.55;
+    img{
+      box-shadow: var(--box-shadow-sm);
+    }
+  }
+
   &-option.selected{
     opacity: 1;
     cursor: default;
