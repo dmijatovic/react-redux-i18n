@@ -109,12 +109,13 @@ const mapStateToProps = state => {
  */
 const mapDispatchToProps = dispatch =>{
   return {
-    //note short ES6 fn notation (single line assumes return)
+    //short ES6 fn notation (single line assumes return)
     onShowLoader: () => dispatch({type:actionType.SHOW_LOADER}),
     onHideLoader: () => dispatch({type:actionType.HIDE_LOADER}),
     setLoaderType: (loaderType) => dispatch({type:actionType.SET_LOADER_TYPE, payload: loaderType}),
+    //long ES6 fn notation (needs return)
     setPageTitle: (pageTitle) => {
-      return dispatch({type:"SET_PAGE_TITLE",payload: pageTitle});
+      return dispatch({type:actionType.SET_PAGE_TITLE,payload: pageTitle});
     }
   }
 }
