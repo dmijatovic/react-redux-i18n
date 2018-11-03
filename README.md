@@ -98,8 +98,29 @@ To add new page into this project following steps are required
 
 ## Redux
 
-All redux definitions are in store folder.
+All redux definitions are in store folder. The index.js file in this folder imports all redux parts and creates a store. Then the store is imported in main index.js file.
+
+```javascript
+  //index.js
+  //--- start section ---
+  //REDUX
+  import { Provider } from 'react-redux';
+  import appStore from './store';
+  //-- end section --
+```
 
 ### Actions
 
+All action are defined in store/actions.js
 
+### Middleware
+
+All middleware functions are defined in store/middleware.js
+
+### Reducers
+
+All reducers are defined in store/reducers.js
+
+### initialStore values
+
+Initial values are in some reducers taken from config file store/app.cfg.js
