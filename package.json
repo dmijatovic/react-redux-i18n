@@ -1,6 +1,6 @@
 {
-  "name": "react-i18n-starter",
-  "version": "2.0.0",
+  "name": "react-redux-i18n-demo",
+  "version": "1.0.0",
   "description": "React webpack 4 babel 7 starter",
   "main": "webpack.config.js",
   "scripts": {

@@ -80,7 +80,7 @@ module.exports = {
 		//https://webpack.js.org/plugins/copy-webpack-plugin/
 		new CopyWebpackPlugin([
 			//copy all files from assets dir to root
-			'./assets/'
+			'./static/'
 		]),
 		//uglify js
 		new UglifyJSPlugin(),
