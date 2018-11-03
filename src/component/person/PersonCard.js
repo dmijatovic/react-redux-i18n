@@ -2,12 +2,30 @@ import React from 'react';
 
 import './PersonCard.scss';
 
-const PersonCard = (props) => (
+//let datum = new Date();
+
+const PersonCard = props => (
   <div className="person-card">
-    <h3 className="person-name">{props.name}</h3>
-    <h3 className="person-age">{props.age}</h3>
-    <button className="btn bn-white person-btn-delete"
-      onClick={()=>props.deletePerson(props.id)}>X</button>
+    <div className="person-card-header">
+      <h3 className="person-name">
+        {props.nameLabel}
+        {props.name}
+      </h3>
+      <button className="btn btn-white person-btn-delete"
+        onClick={()=>props.deletePerson(props.id)}>
+      </button>
+    </div>
+    <div className="person-card-body">
+      <h3 className="person-age">
+        {props.ageLabel}
+        {props.age}
+      </h3>
+      <div className="person-added">
+        {props.addedLabel}: {props.added.toLocaleDateString()}
+        <br/>
+        {props.atLabel}: {props.added.toLocaleTimeString()}
+      </div>
+    </div>
   </div>
 )
 

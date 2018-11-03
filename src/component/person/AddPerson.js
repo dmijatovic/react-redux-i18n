@@ -9,40 +9,72 @@ import './AddPerson.scss';
  * Note! the parent takes care of adding the person to redux store
  */
 class AddPerson extends React.Component{
+  /* NOTE!
+   * binding state to input values requres empty string
+   * to be used in order to bind and not display warnings.
+   */
   state={
-    name:'Test name',
-    age: 24
+    name:"",
+    age:"",
+    disabled:true
   }
   setName = (event) =>{
-    this.setState({name: event.target.value});
+    let disabled = event.target.value=="" || this.state.age=="";
+    this.setState({
+      name: event.target.value,
+      disabled
+    });
   }
   setAge = (event) =>{
-    this.setState({age: event.target.value});
+    let disabled = this.state.name=="" || event.target.value=="";
+    this.setState({
+      age: event.target.value,
+      disabled
+    });
   }
-  addPerson = () =>{
+  onAddPerson = () =>{
     //console.log("Add person...", this.state);
-    this.props.addPerson(this.state);
+    this.props.addPerson({
+      ...this.state,
+      added: new Date()
+    });
+    //RESET STATE
+    this.resetState();
+  }
+  resetState = () =>{
+    this.setState({
+      name:"",
+      age:"",
+      disabled:true
+    })
   }
   render(){
     return(
       <div className="persons-add">
+        <div className="persons-add-title">
+          {this.props.title}
+        </div>
+
         <p className="persons-input">
           <input className="form-input"
-            style={{width:75 +'%'}}
+            style={{width:70 +'%'}}
+            name="name"
             type="text"
-            placeholder="Name"
+            placeholder={this.props.namePlaceholder}
             onChange={this.setName}
             value={this.state.name}/>
           <input className="form-input"
-            style={{width:25 +'%'}}
+            style={{width:30 +'%'}}
+            name="age"
             type="number"
-            max="99"
-            placeholder="Age"
+            placeholder={this.props.agePlaceholder}
             onChange={this.setAge}
             value={this.state.age}/>
         </p>
         <button className="btn btn-primary btn-sm"
-          onClick={this.addPerson}>Add
+          onClick={this.onAddPerson}
+          disabled={this.state.disabled}>
+          {this.props.btnLabel}
         </button>
       </div>
     )

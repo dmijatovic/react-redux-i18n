@@ -7,10 +7,23 @@
 
   &-card{
     position: relative;
-    padding: 2rem;
-    margin: 0rem 1rem 1rem 1rem;
+    padding: 1rem 2rem;
+    margin: 1rem;
+    width: 20rem;
+    word-break: break-all;
     background-color: var(--color-light-0);
-    border: var(--border);
+    border: 1px solid var(--color-primary);
+    border-radius: 2px;
+  }
+
+  &-card-header{
+    display: flex;
+    align-items: center;
+    margin-right: 3rem;
+  }
+
+  &-card-body{
+    display: block;
   }
 
   &-name{
@@ -19,15 +32,23 @@
   }
 
   &-age{
+    padding: 2rem 0rem;
     font-size: 3rem;
     text-align: center;
     color: var(--color-dark-1);
   }
 
+  &-added{
+    //text-transform: lowercase;
+  }
+
   &-btn-delete.btn{
     position: absolute;
-    top: 0rem;right: 0rem;
-    padding: 0.5rem;
+    top:1rem; right:1rem;
+    padding: 1rem;
+    background-image: url('../../../static/img/sharp-delete-24px.svg');
+    background-repeat: no-repeat;
+    background-position: center;
     cursor: pointer;
   }
 }

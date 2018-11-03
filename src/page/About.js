@@ -4,74 +4,52 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actionType from '../store/actions';
 
-import { Loader } from '../component';
+import { Loader, TextOnlySection } from '../component';
 import { logGroup } from '../utils';
 import './About.scss';
 
-/*
-const About = props => {
-  // logGroup({
-  //   title:"About",
-  //   method:"render",
-  //   props: props
-  // })
-  const getContent = props => {
-    //debugger
-    if (props.loader.show){
-      setTimeout(()=>{
-        //remove loader
-        props.dispatch({
-          type:actionType.HIDE_LOADER
-        })
-      },2000);
-      return (
-        <Loader type={props.loader.type}/>
-      )
-    }else{
-      return(
-        <section className="about-page">
-          <p>This is content of about page!</p>
-        </section>
-      )
-    }
-  }
-  //set title
-  // props.dispatch({
-  //   type: actionType.SET_PAGE_TITLE,
-  //   payload:"About page"
-  // })
-  //set translated title
-  return (
-    <React.Fragment>
-      <div className="page-body-header">
-        <h2>{props.pageTitle}</h2>
-      </div>
-      { getContent(props) }
-    </React.Fragment>
-  );
-};*/
-
 class About extends Component {
+  /**
+    class flag used to update title
+    only once (avoiding react-redux update loops)
+  */
+  updatedPageTitle = false;
+  /**
+   * Return the content for about page body.
+   * If loader flag set returnes loader,
+   * otherwise loops textSections array and
+   * returns TextOnlySection components.
+   */
   getContent = () =>{
+    //debugger
+    let jsx;
     if (this.props.loader.show){
-      return (
+      jsx = (
         <Loader type={this.props.loader.type}/>
       )
-    }else{
-      return(
-        <section className="about-page">
-          <p>This is content of about page!</p>
-        </section>
-      )
+    } else if (this.props.textSections){
+
+      jsx = this.props.textSections.map((item, i) => {
+        return (
+          <TextOnlySection
+            key={i}
+            sectionTitle={item.sectionTitle}
+            sectionText={item.sectionText}
+          />
+        )
+      })
     }
+    return jsx;
   }
   render() {
     return (
       <React.Fragment>
         <div className="page-body-header">
-          <h2>{this.props.pageTitle}</h2>
+          <h2>{ this.props.pageTitle }</h2>
         </div>
-        { this.getContent() }
+        <section className="about-page">
+          { this.getContent() }
+        </section>
       </React.Fragment>
     );
   }
@@ -81,7 +59,8 @@ class About extends Component {
       method:"componentDidMount",
       props: this.props
     })
-    // temp loader demo
+    //temp loader demo
+    //remove in production :-)
     setTimeout(()=>{
       //remove loader
       this.props.dispatch({
@@ -96,12 +75,15 @@ class About extends Component {
       props: this.props
     })
     //update page title in app header component
-    if (this.props.pageTitle){
+    if (this.props.pageTitle && !this.updatedPageTitle){
       //debugger
       this.props.dispatch({
         type: actionType.SET_PAGE_TITLE,
         payload: this.props.pageTitle
       })
+      //debugger
+      //change flag
+      this.updatedPageTitle=true;
     }
   }
 }
@@ -119,20 +101,20 @@ const mapStateToProps = state => {
     //debugger
     return {
       pageTitle: data['About.pageTitle'],
+      textSections: data['About.pageSections'],
       loader: state.loader
     }
   }else{
     return {
-      //pageTitle: null,
       loader: state.loader
     }
   }
 }
 
 /**
- * Connected functional component
+ * Connected class component
  * If second function mapDispatchToProps is not passed
- * dispatch function is added to props
+ * dispatch function is automatically added to props
  */
 export default connect(
   mapStateToProps

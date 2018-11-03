@@ -27,7 +27,7 @@ export class Home extends React.Component{
       )
     } else{
       return(
-        <section className="app-page-content">
+        <section className="page-content">
           <Persons/>
         </section>
       );
@@ -45,6 +45,9 @@ export class Home extends React.Component{
         <div className="page-body-header">
           <h2>{this.props.pageTitle}</h2>
         </div>
+        <p className="page-body-intro">
+          {this.props.introText}
+        </p>
         { this.getContent() }
       </React.Fragment>
     );
@@ -91,11 +94,11 @@ const mapStateToProps = state => {
   if (data){
     return {
       pageTitle: data['Home.pageTitle'],
+      introText: data['Home.introText'],
       loader: state.loader
     }
   }else{
     return {
-      //pageTitle: state.header.pageTitle,
       loader: state.loader
     }
   }

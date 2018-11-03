@@ -5,10 +5,12 @@
 
 .persons{
   &-add{
-    flex:1;
     display: flex;
-    flex-direction: row;    
+    flex-direction: row;
     justify-content: center;
     align-items: center;
+  }
+  &-add-title{
+    flex:1;
   }
 }

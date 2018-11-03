@@ -36,11 +36,13 @@ export const cfg = {
     options:[{
       key:'en',
       label:'English',
-      data:'data/en.json'
+      data:'data/en.json',
+      icon:'img/us.svg'
     },{
       key:'nl',
       label:'Dutch',
-      data:'data/nl.json'
+      data:'data/nl.json',
+      icon:'img/nl.svg'
     }],
     //current language info goes here
     //see languageReducer for implementation

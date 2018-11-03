@@ -74,6 +74,12 @@ a.link-item.selected{
 }
 
 
+.nav-widgets{
+  display: flex;
+  padding: 0rem 1rem;
+}
+
+
 @media screen and (min-width:768px){
   a.link-item{
     width: 17rem;

@@ -4,11 +4,17 @@
 */
 
 .persons{
-  padding: 1rem;
-  display: block;
-
+  padding: 0rem 1rem;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  align-content: flex-start;
 
   &-add{
+    //row direction but take complete row->100%
+    flex: 1 0 100%;
     display: flex;
     flex-direction: column;
     min-width: 25rem;
@@ -22,10 +28,35 @@
       flex:1;
     }
   }
-  &-list{
+  &-collection{
+    //used to place collection-empty absolute
+    position: relative;
+    //row direction but take complete row->100%
+    flex: 1 0 100%;
     display: flex;
+    align-items: flex-start;
     flex-wrap: wrap;
+    justify-content: center;
     padding: 1rem 0rem;
     border-top: var(--border-1);
+    height: calc(100% - 5rem);
+  }
+
+  &-collection-title{
+    flex: 1 0 100%;
+    padding: 1rem 0rem;
+    //border-bottom: 0.5px solid var(--color-light-1);
+    color: var(--color-primary-contrast);
+    background-color: var(--color-primary);
+    text-align: center;
+  }
+  &-collection-empty{
+    position: absolute;
+    left: 50%; top:50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    width: 100%;
+    text-align: center;
+    color: var(--color-light-2);
   }
 }

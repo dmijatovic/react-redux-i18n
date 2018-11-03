@@ -3,9 +3,11 @@ import Loader from './loader/Loader';
 import ErrorModal from './modal/ErrorModal';
 import Paper from './paper/Paper';
 import Clock from './clock/Clock';
-import Language from './language/Language';
-
 import Persons from './person/Persons';
+
+import LanguageDropdown from './language/LanguageDropdown';
+import LanguageButtons from './language/LanguageButtons';
+import TextOnlySection from './article/TextOnlySection';
 
 
 export {
@@ -14,5 +16,7 @@ export {
   Paper,
   Clock,
   Persons,
-  Language
+  LanguageDropdown,
+  LanguageButtons,
+  TextOnlySection
 }

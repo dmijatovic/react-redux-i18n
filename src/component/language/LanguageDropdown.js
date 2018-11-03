@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import * as actionType from '../../store/actions';
 
-const Language = props => {
+const LanguageDropdown = props => {
   return (
     <select onChange={props.onLangChange}>
       { props.languages.map(item =>{
@@ -19,8 +19,8 @@ const Language = props => {
 };
 
 /**
- * Redux connection to pass dispatch action into Language
- * @param {*} dispatch
+ * Redux dispatch action connection
+ * @param {function} dispatch
  */
 const mapDispatchToProps = dispatch => {
   return {
@@ -39,9 +39,8 @@ const mapDispatchToProps = dispatch => {
 }
 
 /**
- * Redux connection to pass state to component
- * as properties
- * @param {*} state
+ * Redux state connection to component
+ * @param {object} state
  */
 const mapStateToProps = state => {
   //debugger
@@ -65,4 +64,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Language);
+)(LanguageDropdown);
