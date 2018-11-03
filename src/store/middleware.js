@@ -1,10 +1,12 @@
 /**
  * Redux middleware
+ * v0.0.1 Nov 2018
  */
 
 import * as actionType from './actions';
-import { logGroup } from '../utils';
-
+//eslint-disable-next-line
+import { logGroup, setLanguage } from '../utils';
+import cfg from './app.cfg';
 /**
  * Fetch data middleware, uses fetch API
  * @param param.getState: fn, received from redux
@@ -24,8 +26,8 @@ export const asyncFetch = ({getState, dispatch}) =>{
     switch(action.type){
       //get translations
       case actionType.GET_LANGUAGE:
-        //change action to show loader
-        /*next ({
+        /* change action to show loader
+        next ({
           type: actionType.SHOW_LOADER,
         })*/
         //load translations
@@ -40,8 +42,14 @@ export const asyncFetch = ({getState, dispatch}) =>{
               data: t
             }
           })
-          //hide loader
-          /*next ({
+          //debugger
+          //save language preference to localStorage
+          setLanguage({
+            key: cfg.i18n.lsKey,
+            val: action.payload.key
+          })
+          /* hide loader
+          next ({
             type: actionType.HIDE_LOADER
           })*/
         })
@@ -151,7 +159,7 @@ function prepPayload( id, data, error = null ){
  */
 function fetchData (action) {
   //get url and type of call
-  let apiPoint = config.api[action.payload.id];
+  let apiPoint = cfg.api[action.payload.id];
   let options = {
     method: apiPoint.method
   }
@@ -201,7 +209,7 @@ export const getTranslation = ({ getState, dispatch }) => {
       //get translations
       case actionType.SET_APP_TITLE:
       case actionType.SET_PAGE_TITLE:
-        debugger
+        //debugger
         //do we need to translate?
         if (action.payload.translate){
           //get redux state

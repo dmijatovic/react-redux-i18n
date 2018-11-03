@@ -51,6 +51,11 @@ export const cfg = {
       label:null,
       data:null
     }
+  },
+  //list of data api points
+  api:{
+    baseUrl:"",
+    point1:"sample/example"
   }
 }
 

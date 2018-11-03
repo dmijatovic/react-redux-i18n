@@ -32,9 +32,11 @@ export const getLanguage = key => {
  * @param {string} lang 2-letter language key stored in definitions
  */
 export const setLanguage = ({ key, val }) => {
+  //debugger
   if (localStorage){
     localStorage.setItem(key, val);
   }else{
+    //eslint-disable-next-line
     console.error("localStorage...MISSING");
   }
 }
@@ -56,6 +58,7 @@ export const initLocale = dispatch => {
       }
     })
   } else {
+    //eslint-disable-next-line
     console.warn("locale.initLocale...could not extract locale");
   }
 }
