@@ -18,11 +18,24 @@ export const getLanguage = key => {
   if (l){
     return l;
   }else{
-    //TODO! check browser language settings
-
-    //TODO! check if language available in cfg
-
-    //only default available
+    /* if user have for more than one language defined -> MAYBE SOME DAY, not now
+      if (navigator.languages){
+      console.log("navigator.languages...",navigator.languages)
+    }*/
+    //get navigator language
+    if (navigator.language){
+      //debugger
+      //get first 2 letter from the locale
+      let ln = navigator.language.split("-");
+      //check if language available in cfg
+      let lang = cfg.i18n.options.filter(item => item.key==ln[0]);
+      if (lang.length===1){
+        return lang[0].key;
+        //console.log("using navigator.language...",lang);
+      }
+    }
+    //navigator language is not available
+    //so use default from config
     return cfg.i18n.defaultLang;
   }
 }
