@@ -1,4 +1,3 @@
-
 import Loader from './loader/Loader';
 import ErrorModal from './modal/ErrorModal';
 import Paper from './paper/Paper';
@@ -9,7 +8,6 @@ import LanguageDropdown from './language/LanguageDropdown';
 import LanguageButtons from './language/LanguageButtons';
 import TextOnlySection from './article/TextOnlySection';
 
-
 export {
   Loader,
   ErrorModal,
@@ -18,5 +16,5 @@ export {
   Persons,
   LanguageDropdown,
   LanguageButtons,
-  TextOnlySection
-}
+  TextOnlySection,
+};

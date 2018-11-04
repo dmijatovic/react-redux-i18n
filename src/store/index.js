@@ -1,4 +1,3 @@
-
 /**
  * REDUX setup
  * v.0.0.1 Oct 2018
@@ -7,20 +6,18 @@ import {
   createStore,
   combineReducers,
   applyMiddleware,
-  compose
+  compose,
 } from 'redux';
 
 import {
   loaderReducer,
   headerReducer,
   languageReducer,
-  personsReducer
+  personsReducer,
 } from './reducers';
 
 //APP CUSTOM MIDDLEWARE
-import {
-  asyncFetch, actionLogger
-} from './middleware';
+import { asyncFetch, actionLogger } from './middleware';
 
 //debugger
 
@@ -28,16 +25,18 @@ const reducers = combineReducers({
   loader: loaderReducer,
   header: headerReducer,
   persons: personsReducer,
-  i18n: languageReducer
+  i18n: languageReducer,
 });
 
 const appStore = createStore(
   reducers,
   compose(
     applyMiddleware(
-    //NOTE! the middleware order matters
-    actionLogger, asyncFetch
-  ))
+      //NOTE! the middleware order matters
+      actionLogger,
+      asyncFetch
+    )
+  )
 );
 
 export default appStore;

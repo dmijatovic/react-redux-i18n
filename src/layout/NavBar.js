@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 //REDUX
 //import { connect } from 'react-redux';
 //ROUTER
-import { NavLink  } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 //LOCAL
 import { Clock, LanguageButtons } from '../component';
 import './NavBar.scss';
@@ -13,42 +13,39 @@ import routes from '../router/routes';
  */
 class NavBar extends Component {
   createLinks = () => {
-    let links=[];
-    routes.forEach( item => {
-      if (item.label){
+    let links = [];
+    routes.forEach(item => {
+      if (item.label) {
         //extract translations
         /*let trans
         if (this.props.routeLabel){
           trans = this.props.routeLabel[item.path];
         }*/
         links.push(
-          <li className="link-item"
-            key={item.path}>
+          <li className="link-item" key={item.path}>
             <NavLink
               className="link-item"
               key={item.path}
               to={item.path}
               activeClassName="selected">
-                { item.label }
+              {item.label}
             </NavLink>
           </li>
-        )
+        );
       }
-    })
+    });
     //debugger
     return links;
-  }
+  };
   render() {
     return (
       <nav className="app-navbar">
         <section className="app-navbar-body">
-          <ul className="nav-menu">
-            { this.createLinks() }
-          </ul>
+          <ul className="nav-menu">{this.createLinks()}</ul>
 
           <div className="nav-widgets">
-            <LanguageButtons/>
-            <Clock/>
+            <LanguageButtons />
+            <Clock />
           </div>
         </section>
       </nav>

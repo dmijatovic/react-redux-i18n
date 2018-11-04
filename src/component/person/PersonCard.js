@@ -11,9 +11,10 @@ const PersonCard = props => (
         {props.nameLabel}
         {props.name}
       </h3>
-      <button className="btn btn-white person-btn-delete"
-        onClick={()=>props.deletePerson(props.id)}>
-      </button>
+      <button
+        className="btn btn-white person-btn-delete"
+        onClick={() => props.deletePerson(props.id)}
+      />
     </div>
     <div className="person-card-body">
       <h3 className="person-age">
@@ -22,11 +23,11 @@ const PersonCard = props => (
       </h3>
       <div className="person-added">
         {props.addedLabel}: {props.added.toLocaleDateString()}
-        <br/>
+        <br />
         {props.atLabel}: {props.added.toLocaleTimeString()}
       </div>
     </div>
   </div>
-)
+);
 
 export default PersonCard;

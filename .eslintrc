@@ -22,6 +22,19 @@
     "jest": true
   },
   "rules": {
+    "prettier/prettier": [
+      "warn",
+      {
+        "printWidth": 64,
+        "tabWidth": 2,
+        "useTabs": false,
+        "semi": true,
+        "singleQuote": true,
+        "trailingComma": "es5",
+        "arrowParens": "avoid",
+        "jsxBracketSameLine": true
+      }
+    ],
     "no-unused-vars": [
       "warn",
       {

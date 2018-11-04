@@ -2,21 +2,21 @@ import React from 'react';
 
 import { logGroup } from '../utils';
 
-class ErrorPage extends React.Component{
-  componentDidMount(){
+class ErrorPage extends React.Component {
+  componentDidMount() {
     logGroup({
-      title:"ErrorPage",
-      method:"componentDidMount",
-      props: this.props
-    })
+      title: 'ErrorPage',
+      method: 'componentDidMount',
+      props: this.props,
+    });
   }
-  render(){
+  render() {
     logGroup({
-      title:"ErrorPage",
-      method:"render",
-      props: this.props
-    })
-    let {match} = this.props;
+      title: 'ErrorPage',
+      method: 'render',
+      props: this.props,
+    });
+    let { match } = this.props;
     return (
       <div>
         <h1>{match.params.id} - Error</h1>

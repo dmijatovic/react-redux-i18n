@@ -1,4 +1,3 @@
-
 import cfg from './app.cfg';
 import * as actionType from './actions';
 //eslint-disable-next-line
@@ -9,30 +8,30 @@ import { logGroup } from '../utils';
  * @param state: object, current redux store state of loader store
  * @param action: object, dispatched redux action
  */
-export const loaderReducer = (state=cfg.loader,action)=>{
+export const loaderReducer = (state = cfg.loader, action) => {
   //just for fun use lowercased action types
-  switch (action.type){
+  switch (action.type) {
     case actionType.SHOW_LOADER:
       return {
         ...state,
-        show: true
-      }
+        show: true,
+      };
     case actionType.HIDE_LOADER:
       return {
         ...state,
-        show: false
-      }
+        show: false,
+      };
     case actionType.SET_LOADER_TYPE:
       return {
         ...state,
-        type: action.payload
-      }
+        type: action.payload,
+      };
     //always return state
     //to continue 'event' chain
     default:
       return state;
   }
-}
+};
 
 export const headerReducer = (state = cfg.header, action) => {
   //log action comming into reducer
@@ -43,55 +42,54 @@ export const headerReducer = (state = cfg.header, action) => {
   // });
 
   //define state actions
-  switch (action.type){
+  switch (action.type) {
     case actionType.SET_PAGE_TITLE:
       return {
         ...state,
-        pageTitle: action.payload
-      }
+        pageTitle: action.payload,
+      };
     case actionType.SET_APP_TITLE:
       return {
         ...state,
-        appTitle: action.payload
-      }
+        appTitle: action.payload,
+      };
     case actionType.SET_APP_LOGO:
       return {
         ...state,
-        logo: action.payload
-      }
+        logo: action.payload,
+      };
     //always return state
     //to continue 'event' chain
     default:
       return state;
   }
-}
+};
 
-export const personsReducer = (state=[], action)=>{
+export const personsReducer = (state = [], action) => {
   //log action comming into reducer
   // logGroup({
   //   title:"personsReducer",
   //   state: state,
   //   action: action
   // });
-  switch (action.type){
+  switch (action.type) {
     case actionType.ADD_PERSON:
       //use concat with arrays
       //to return new object (immutable)
       return state.concat({
         ...action.payload,
-        id: Math.random()*1000000
+        id: Math.random() * 1000000,
       });
 
     case actionType.DELETE_PERSON:
       //use filter to return new object (immutable)
-      return state.filter(item=> item.id!=action.payload)
+      return state.filter(item => item.id != action.payload);
     //always return state
     //to continue 'event' chain
     default:
       return state;
   }
-}
-
+};
 
 export const apiDataReducer = (state = {}, action) => {
   /*logGroup({
@@ -99,7 +97,7 @@ export const apiDataReducer = (state = {}, action) => {
     action: action,
     state: state
   });*/
-  switch (action.type){
+  switch (action.type) {
     case actionType.API_DATA_GET:
       //debugger
       //do nothing
@@ -107,20 +105,20 @@ export const apiDataReducer = (state = {}, action) => {
     case actionType.API_DATA_OK:
       return {
         ...state,
-        ...action.payload
-      }
+        ...action.payload,
+      };
     case actionType.API_DATA_ERR:
       //debugger
       return {
         ...state,
-        ...action.payload
-      }
+        ...action.payload,
+      };
     //always return state
     //to continue 'event' chain
     default:
       return state;
   }
-}
+};
 
 /**
  * Language reducer containing lang info and translations
@@ -136,27 +134,25 @@ export const languageReducer = (state = cfg.i18n, action) => {
     state: state
   });*/
   //debugger
-  switch (action.type){
+  switch (action.type) {
     case actionType.SET_LANG_OK:
     case actionType.SET_LANG_ERR:
       //debugger
       return {
         ...state,
-        lang:{
-          ...action.payload
-        }
-      }
+        lang: {
+          ...action.payload,
+        },
+      };
     case actionType.SET_LANG_LIST:
       //debugger
       return {
         ...state,
-        options:[
-          ...action.payload
-        ]
-      }
+        options: [...action.payload],
+      };
     //always return state
     //to continue 'event' chain
     default:
       return state;
   }
-}
+};

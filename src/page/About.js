@@ -15,15 +15,12 @@ class About extends Component {
    * otherwise loops textSections array and
    * returns TextOnlySection components.
    */
-  getContent = () =>{
+  getContent = () => {
     //debugger
     let jsx;
-    if (this.props.loader.show){
-      jsx = (
-        <Loader type={this.props.loader.type}/>
-      )
-    } else if (this.props.textSections){
-
+    if (this.props.loader.show) {
+      jsx = <Loader type={this.props.loader.type} />;
+    } else if (this.props.textSections) {
       jsx = this.props.textSections.map((item, i) => {
         return (
           <TextOnlySection
@@ -31,59 +28,58 @@ class About extends Component {
             sectionTitle={item.sectionTitle}
             sectionText={item.sectionText}
           />
-        )
-      })
+        );
+      });
     }
     return jsx;
-  }
+  };
   render() {
     return (
       <React.Fragment>
         <div className="page-body-header">
-          <h2>{ this.props.pageTitle }</h2>
+          <h2>{this.props.pageTitle}</h2>
         </div>
         <section className="about-page">
-          { this.getContent() }
+          {this.getContent()}
         </section>
       </React.Fragment>
     );
   }
-  componentDidMount(){
+  componentDidMount() {
     logGroup({
-      title:"About",
-      method:"componentDidMount",
-      props: this.props
-    })
+      title: 'About',
+      method: 'componentDidMount',
+      props: this.props,
+    });
     //temp loader demo
     //remove in production :-)
     this.props.dispatch({
-      type:actionType.SHOW_LOADER
-    })
+      type: actionType.SHOW_LOADER,
+    });
     //change loader state after 2 seconds
-    setTimeout(()=>{
+    setTimeout(() => {
       //hide loader
       this.props.dispatch({
-        type:actionType.HIDE_LOADER
-      })
-    },2000);
+        type: actionType.HIDE_LOADER,
+      });
+    }, 2000);
   }
-  componentDidUpdate(){
+  componentDidUpdate() {
     logGroup({
-      title:"About",
-      method:"componentDidUpdate",
-      props: this.props
-    })
+      title: 'About',
+      method: 'componentDidUpdate',
+      props: this.props,
+    });
     //update page title in app header component
-    if (this.props.pageTitle){
+    if (this.props.pageTitle) {
       //debugger
       this.props.dispatch({
         type: actionType.SET_PAGE_TITLE,
-        payload: this.props.pageTitle
-      })
+        payload: this.props.pageTitle,
+      });
     }
   }
 }
-
 
 //-------------- REDUX CONNECTION ---------------------
 /**
@@ -93,26 +89,23 @@ class About extends Component {
 const mapStateToProps = state => {
   //get translations from i18n reducer
   let { data } = state.i18n.lang;
-  if (data){
+  if (data) {
     //debugger
     return {
       pageTitle: data['About.pageTitle'],
       textSections: data['About.pageSections'],
-      loader: state.loader
-    }
-  }else{
+      loader: state.loader,
+    };
+  } else {
     return {
-      loader: state.loader
-    }
+      loader: state.loader,
+    };
   }
-}
+};
 
 /**
  * Connected class component
  * If second function mapDispatchToProps is not passed
  * dispatch function is automatically added to props
  */
-export default connect(
-  mapStateToProps
-)(About);
-
+export default connect(mapStateToProps)(About);

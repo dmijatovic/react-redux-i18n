@@ -5,15 +5,13 @@ import './Paper.css';
 const Paper = props => {
   //console.log("paper props...", props);
   //debugger
-  let classes="paper-widget"
-  if (props.className){
-    classes+=" " + props.className
+  let classes = 'paper-widget';
+  if (props.className) {
+    classes += ' ' + props.className;
   }
   return (
     <div className={classes}>
-      <div className="paper-body">
-        { props.children }
-      </div>
+      <div className="paper-body">{props.children}</div>
     </div>
   );
 };

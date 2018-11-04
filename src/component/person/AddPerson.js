@@ -8,76 +8,83 @@ import './AddPerson.scss';
  * prop addPerson (function).
  * Note! the parent takes care of adding the person to redux store
  */
-class AddPerson extends React.Component{
+class AddPerson extends React.Component {
   /* NOTE!
    * binding state to input values requres empty string
    * to be used in order to bind and not display warnings.
    */
-  state={
-    name:"",
-    age:"",
-    disabled:true
-  }
-  setName = (event) =>{
-    let disabled = event.target.value=="" || this.state.age=="";
+  state = {
+    name: '',
+    age: '',
+    disabled: true,
+  };
+  setName = event => {
+    let disabled =
+      event.target.value == '' || this.state.age == '';
     this.setState({
       name: event.target.value,
-      disabled
+      disabled,
     });
-  }
-  setAge = (event) =>{
-    let disabled = this.state.name=="" || event.target.value=="";
+  };
+  setAge = event => {
+    let disabled =
+      this.state.name == '' || event.target.value == '';
     this.setState({
       age: event.target.value,
-      disabled
+      disabled,
     });
-  }
-  onAddPerson = () =>{
+  };
+  onAddPerson = () => {
     //console.log("Add person...", this.state);
     this.props.addPerson({
       ...this.state,
-      added: new Date()
+      added: new Date(),
     });
     //RESET STATE
     this.resetState();
-  }
-  resetState = () =>{
+  };
+  resetState = () => {
     this.setState({
-      name:"",
-      age:"",
-      disabled:true
-    })
-  }
-  render(){
-    return(
+      name: '',
+      age: '',
+      disabled: true,
+    });
+  };
+  render() {
+    return (
       <div className="persons-add">
         <div className="persons-add-title">
           {this.props.title}
         </div>
 
         <p className="persons-input">
-          <input className="form-input"
-            style={{width:70 +'%'}}
+          <input
+            className="form-input"
+            style={{ width: 70 + '%' }}
             name="name"
             type="text"
             placeholder={this.props.namePlaceholder}
             onChange={this.setName}
-            value={this.state.name}/>
-          <input className="form-input"
-            style={{width:30 +'%'}}
+            value={this.state.name}
+          />
+          <input
+            className="form-input"
+            style={{ width: 30 + '%' }}
             name="age"
             type="number"
             placeholder={this.props.agePlaceholder}
             onChange={this.setAge}
-            value={this.state.age}/>
+            value={this.state.age}
+          />
         </p>
-        <button className="btn btn-primary btn-sm"
+        <button
+          className="btn btn-primary btn-sm"
           onClick={this.onAddPerson}
           disabled={this.state.disabled}>
           {this.props.btnLabel}
         </button>
       </div>
-    )
+    );
   }
 }
 

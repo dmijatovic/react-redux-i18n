@@ -12,34 +12,32 @@ import * as actionType from '../store/actions';
  * Home page
  */
 import './Home.scss';
-export class Home extends React.Component{
+export class Home extends React.Component {
   /**
    * Display content based on loader state.
    * if loader show we return loader,
    * otherwise page content with persons
    */
-  getContent=()=>{
-     //debugger
-     if (this.props.loader.show){
+  getContent = () => {
+    //debugger
+    if (this.props.loader.show) {
+      return <Loader type={this.props.loader.type} />;
+    } else {
       return (
-        <Loader type={this.props.loader.type}/>
-      )
-    } else{
-      return(
         <section className="page-content">
-          <Persons/>
+          <Persons />
         </section>
       );
     }
-  }
-  render(){
+  };
+  render() {
     logGroup({
-      title:"Home",
-      method:"render",
+      title: 'Home',
+      method: 'render',
       state: this.state,
-      props: this.props
-    })
-    return(
+      props: this.props,
+    });
+    return (
       <React.Fragment>
         <div className="page-body-header">
           <h2>{this.props.pageTitle}</h2>
@@ -47,35 +45,35 @@ export class Home extends React.Component{
         <p className="page-body-intro">
           {this.props.introText}
         </p>
-        { this.getContent() }
+        {this.getContent()}
       </React.Fragment>
     );
   }
-  componentDidMount(){
+  componentDidMount() {
     logGroup({
-      title:"Home",
-      method:"componentDidMount",
+      title: 'Home',
+      method: 'componentDidMount',
       state: this.state,
-      props: this.props
-    })
+      props: this.props,
+    });
     //first show loader
     this.props.onShowLoader();
     //change loader state after 2 seconds
-    setTimeout(()=>{
+    setTimeout(() => {
       //dispatch action to redux store
       //to hide loader
       this.props.onHideLoader();
-    },2000);
+    }, 2000);
   }
-  componentDidUpdate(){
+  componentDidUpdate() {
     logGroup({
-      title:"Home",
-      method:"componentDidUpdate",
+      title: 'Home',
+      method: 'componentDidUpdate',
       state: this.state,
-      props: this.props
-    })
+      props: this.props,
+    });
     //update page title in Header
-    if (this.props.pageTitle){
+    if (this.props.pageTitle) {
       this.props.setPageTitle(this.props.pageTitle);
     }
   }
@@ -90,34 +88,43 @@ const mapStateToProps = state => {
   //debugger
   //get translations from i18n reducer
   let { data } = state.i18n.lang;
-  if (data){
+  if (data) {
     return {
       pageTitle: data['Home.pageTitle'],
       introText: data['Home.introText'],
-      loader: state.loader
-    }
-  }else{
+      loader: state.loader,
+    };
+  } else {
     return {
-      loader: state.loader
-    }
+      loader: state.loader,
+    };
   }
-}
+};
 /**
  * Map redux dispatch actions to local component props
  * @param dispatch: function, redux dispatch function
  */
-const mapDispatchToProps = dispatch =>{
+const mapDispatchToProps = dispatch => {
   return {
     //short ES6 fn notation (single line assumes return)
-    onShowLoader: () => dispatch({type:actionType.SHOW_LOADER}),
-    onHideLoader: () => dispatch({type:actionType.HIDE_LOADER}),
-    setLoaderType: (loaderType) => dispatch({type:actionType.SET_LOADER_TYPE, payload: loaderType}),
+    onShowLoader: () =>
+      dispatch({ type: actionType.SHOW_LOADER }),
+    onHideLoader: () =>
+      dispatch({ type: actionType.HIDE_LOADER }),
+    setLoaderType: loaderType =>
+      dispatch({
+        type: actionType.SET_LOADER_TYPE,
+        payload: loaderType,
+      }),
     //long ES6 fn notation (needs return)
-    setPageTitle: (pageTitle) => {
-      return dispatch({type:actionType.SET_PAGE_TITLE,payload: pageTitle});
-    }
-  }
-}
+    setPageTitle: pageTitle => {
+      return dispatch({
+        type: actionType.SET_PAGE_TITLE,
+        payload: pageTitle,
+      });
+    },
+  };
+};
 
 /**
  * Export app class connected with Redux store

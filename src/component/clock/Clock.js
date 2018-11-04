@@ -2,33 +2,33 @@ import React from 'react';
 
 import './Clock.scss';
 
-export class Clock extends React.Component{
-  constructor(props){
+export class Clock extends React.Component {
+  constructor(props) {
     super(props);
     this.initState();
   }
-  initState(){
+  initState() {
     //eslint-disable-next-line
     this.state={
-      time:{
-        hrs: "00",
-        min: "00",
+      time: {
+        hrs: '00',
+        min: '00',
       },
       update: 1000,
       semicolon: true,
-    }
+    };
   }
-  componentDidMount(){
+  componentDidMount() {
     //set clock update interval
-    this.timerId = setInterval(()=>{
-      this.tick()
-    }, this.state.update)
+    this.timerId = setInterval(() => {
+      this.tick();
+    }, this.state.update);
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     //remove timer
     clearInterval(this.timerId);
   }
-  tick(){
+  tick() {
     //console.log("Update time...");
     //debugger
     let time = new Date(),
@@ -38,10 +38,10 @@ export class Clock extends React.Component{
     this.setState({
       time: {
         hrs: this.formatShortNumToStr(hrs),
-        min: this.formatShortNumToStr(min)
+        min: this.formatShortNumToStr(min),
       },
       //toggle visibility
-      semicolon: !this.state.semicolon
+      semicolon: !this.state.semicolon,
     });
   }
   /**
@@ -49,38 +49,37 @@ export class Clock extends React.Component{
    *
    * @param {*} num
    */
-  formatShortNumToStr(num){
-    let strNum="00";
-    if (num < 10){
+  formatShortNumToStr(num) {
+    let strNum = '00';
+    if (num < 10) {
       strNum = `0${num}`;
-    }else{
+    } else {
       strNum = num.toString();
     }
     return strNum;
   }
-  showSemicolon(){
-    if (this.state.semicolon){
+  showSemicolon() {
+    if (this.state.semicolon) {
       //show semicolon
-      return (<div className="app-clock-semicol">:</div>);
-    }else{
+      return <div className="app-clock-semicol">:</div>;
+    } else {
       //hide semicolon
-      return (<div className="app-clock-semicol"></div>);
+      return <div className="app-clock-semicol" />;
     }
   }
-  render(){
-    return(
+  render() {
+    return (
       <time className="app-clock">
         <div className="app-clock-hours">
-          { this.state.time.hrs }
+          {this.state.time.hrs}
         </div>
-        { //show/hide semicolon on each interval
-          this.showSemicolon()
-        }
+        {//show/hide semicolon on each interval
+        this.showSemicolon()}
         <div className="app-clock-minutes">
-          { this.state.time.min }
+          {this.state.time.min}
         </div>
       </time>
-    )
+    );
   }
 }
 

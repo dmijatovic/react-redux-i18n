@@ -10,13 +10,13 @@ export const logGroup = data => {
   if (data.title) {
     //eslint-disable-next-line
     console.group(data.title);
-    ignore.push("title");
+    ignore.push('title');
   } else {
     //eslint-disable-next-line
     console.group("logGroup");
   }
 
-  props.forEach((key) => {
+  props.forEach(key => {
     //debugger
     //only if not in ignore list
     if (ignore.indexOf(key) === -1) {
@@ -26,4 +26,4 @@ export const logGroup = data => {
   });
   //eslint-disable-next-line
   console.groupEnd();
-}
+};

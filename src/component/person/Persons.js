@@ -2,20 +2,20 @@
 import React from 'react';
 
 //THIRD PARTY
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 //LOCAL
 import * as actionType from '../../store/actions';
 import './Persons.scss';
 import AddPerson from './AddPerson';
-import PersonCard from'./PersonCard';
+import PersonCard from './PersonCard';
 /**
  * Class Persons handles adding new persons
  * and displaying added persons in an card.
  * It depends on AddPerson and PersonCard
  * components.
  */
-export class Persons extends React.Component{
+export class Persons extends React.Component {
   /**
    * Create persons content.
    * If persons array filled generate person cards per person
@@ -24,8 +24,8 @@ export class Persons extends React.Component{
   getContent = () => {
     //create jsx content
     let jsx;
-    if (this.props.persons.length > 0){
-      jsx = this.props.persons.map((p)=>{
+    if (this.props.persons.length > 0) {
+      jsx = this.props.persons.map(p => {
         //debugger
         return (
           <PersonCard
@@ -33,25 +33,30 @@ export class Persons extends React.Component{
             deletePerson={this.props.onDeletePerson}
             addedLabel={this.props.personCardAddedLabel}
             atLabel={this.props.personCardAtLabel}
-            key={p.id}/>
-        )
+            key={p.id}
+          />
+        );
       });
-    }else{
-      jsx=(
+    } else {
+      jsx = (
         <div className="persons-collection-empty">
           <p>{this.props.personsListEmptyMessage}</p>
         </div>
-      )
+      );
     }
     return jsx;
-  }
-  render(){
-    return(
+  };
+  render() {
+    return (
       <div className="persons">
         <AddPerson
           title={this.props.addPersonTitle}
-          namePlaceholder={this.props.addPersonInputNamePlaceholder}
-          agePlaceholder={this.props.addPersonInputAgePlaceholder}
+          namePlaceholder={
+            this.props.addPersonInputNamePlaceholder
+          }
+          agePlaceholder={
+            this.props.addPersonInputAgePlaceholder
+          }
           btnLabel={this.props.addPersonBtnLabel}
           addPerson={this.props.onAddPerson}
         />
@@ -61,50 +66,58 @@ export class Persons extends React.Component{
               {this.props.personsListTitle}
             </h3>
           */}
-          { this.getContent() }
+          {this.getContent()}
         </div>
       </div>
-    )
+    );
   }
 }
 
 //-------------- REDUX CONNECTION ---------------------
 
-const mapStateToProps = state =>{
+const mapStateToProps = state => {
   //debugger
   //get translations from i18n reducer
   let { data } = state.i18n.lang;
-  if (data){
+  if (data) {
     return {
       persons: state.persons,
       addPersonTitle: data['AddPerson.title'],
-      addPersonInputNamePlaceholder: data['AddPerson.input.name.placeholder'],
-      addPersonInputAgePlaceholder: data['AddPerson.input.age.placeholder'],
+      addPersonInputNamePlaceholder:
+        data['AddPerson.input.name.placeholder'],
+      addPersonInputAgePlaceholder:
+        data['AddPerson.input.age.placeholder'],
       addPersonBtnLabel: data['AddPerson.btnLabel'],
       personsListTitle: data['Persons.ListTitle'],
       personsListEmptyMessage: data['Persons.ListEmptyMessage'],
       personCardAddedLabel: data['PersonCard.addedLabel'],
       personCardAtLabel: data['PersonCard.atLabel'],
-    }
-  }else{
-    return{
-      persons: state.persons
-    }
+    };
+  } else {
+    return {
+      persons: state.persons,
+    };
   }
-}
+};
 
-const mapDispatchToProps = dispatch =>{
+const mapDispatchToProps = dispatch => {
   return {
-    onAddPerson: (person) => {
+    onAddPerson: person => {
       //debugger
-      return dispatch({type: actionType.ADD_PERSON, payload: person})
+      return dispatch({
+        type: actionType.ADD_PERSON,
+        payload: person,
+      });
     },
-    onDeletePerson: (id) => {
+    onDeletePerson: id => {
       //debugger
-      return dispatch({type: actionType.DELETE_PERSON, payload: id})
-    }
-  }
-}
+      return dispatch({
+        type: actionType.DELETE_PERSON,
+        payload: id,
+      });
+    },
+  };
+};
 
 //----------- EXPORT CONNECTED COMPONENT ------------
 export default connect(

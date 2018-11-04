@@ -23,7 +23,7 @@ import Page from './layout/Page';
 
 ReactDOM.render(
   <Provider store={appStore}>
-    <Page/>
+    <Page />
   </Provider>,
   document.getElementById('react-root')
-)
+);

@@ -12,12 +12,8 @@ export class Footer extends Component {
     return (
       <footer className="app-footer">
         <section className="app-footer-body">
-          <div className="footer-left">
-            {this.props.left}
-          </div>
-          <div className="footer-right">
-            {this.props.right}
-          </div>
+          <div className="footer-left">{this.props.left}</div>
+          <div className="footer-right">{this.props.right}</div>
         </section>
       </footer>
     );

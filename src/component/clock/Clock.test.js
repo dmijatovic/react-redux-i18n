@@ -1,40 +1,40 @@
 import React from 'react';
-import {configure, shallow } from 'enzyme';
+import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { Clock } from './Clock';
 
-configure({adapter: new Adapter()});
+configure({ adapter: new Adapter() });
 
-describe("<Clock/> component",()=>{
+describe('<Clock/> component', () => {
   let wrapper;
-  beforeEach(()=>{
+  beforeEach(() => {
     //get reference to clock object
-    wrapper = shallow(<Clock/>);
+    wrapper = shallow(<Clock />);
   });
 
-  it('should render',()=>{
+  it('should render', () => {
     //debugger
     expect(wrapper.instance().state).toEqual({
-      time:{
-        hrs: "00",
-        min: "00",
+      time: {
+        hrs: '00',
+        min: '00',
       },
       update: 1000,
       semicolon: true,
     });
   });
 
-  it('should add 0 to 1 in formatShortNumToStr',()=>{
+  it('should add 0 to 1 in formatShortNumToStr', () => {
     let num = wrapper.instance().formatShortNumToStr(1);
-    expect(num).toStrictEqual("01");
+    expect(num).toStrictEqual('01');
   });
 
-  it('should return string formatShortNumToStr',()=>{
+  it('should return string formatShortNumToStr', () => {
     let num = wrapper.instance().formatShortNumToStr(24);
-    expect(num).toStrictEqual("24");
+    expect(num).toStrictEqual('24');
   });
 
-  it('should have timer with hrs of length 2',()=>{
+  it('should have timer with hrs of length 2', () => {
     //debugger
     //tick time
     wrapper.instance().tick();
@@ -43,12 +43,11 @@ describe("<Clock/> component",()=>{
     expect(hrs.length).toEqual(2);
   });
 
-  it('should have timer with min of length 2',()=>{
+  it('should have timer with min of length 2', () => {
     //tick time
     wrapper.instance().tick();
     let min = wrapper.instance().state.time.min;
     //expect to have length of 2;
     expect(min.length).toEqual(2);
   });
-
 });

@@ -5,14 +5,12 @@ import * as actionType from '../../store/actions';
 const LanguageDropdown = props => {
   return (
     <select onChange={props.onLangChange}>
-      { props.languages.map(item =>{
+      {props.languages.map(item => {
         return (
-          <option
-            key={item.key}
-            value={JSON.stringify(item)}>
-            { item.label }
+          <option key={item.key} value={JSON.stringify(item)}>
+            {item.label}
           </option>
-        )
+        );
       })}
     </select>
   );
@@ -32,11 +30,11 @@ const mapDispatchToProps = dispatch => {
       let ln = JSON.parse(e.target.value);
       dispatch({
         type: actionType.GET_LANGUAGE,
-        payload: ln
-      })
-    }
-  }
-}
+        payload: ln,
+      });
+    },
+  };
+};
 
 /**
  * Redux state connection to component
@@ -44,22 +42,24 @@ const mapDispatchToProps = dispatch => {
  */
 const mapStateToProps = state => {
   //debugger
-  let {key} = state.i18n.lang;
+  let { key } = state.i18n.lang;
 
-  if (key){
+  if (key) {
     //language is loaded
-    let selected = state.i18n.options.filter(item=>item.key===key);
-    return{
+    let selected = state.i18n.options.filter(
+      item => item.key === key
+    );
+    return {
       languages: state.i18n.options,
-      selected: JSON.stringify(selected)
-    }
-  }else{
-    return{
+      selected: JSON.stringify(selected),
+    };
+  } else {
+    return {
       languages: state.i18n.options,
-      selected: null
-    }
+      selected: null,
+    };
   }
-}
+};
 
 export default connect(
   mapStateToProps,

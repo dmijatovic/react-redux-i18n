@@ -8,7 +8,8 @@
     "dev": "webpack-dev-server --env=dev",
     "build:dev": "webpack --env=dev",
     "build": "webpack --env=prod",
-    "lint": "eslint 'src/**/*.js*'"
+    "lint": "eslint 'src/**/*.js*'",
+    "lint:fix": "eslint --fix 'src/**/*.js*'"
   },
   "keywords": [
     "react",
