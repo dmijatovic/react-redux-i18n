@@ -1,5 +1,8 @@
-//polyfills
+//import fetch polyfill
+import 'whatwg-fetch';
+//babel polyfills
 import '@babel/polyfill';
+
 //REACT
 import React from 'react';
 import ReactDOM from 'react-dom';

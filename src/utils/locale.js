@@ -13,7 +13,7 @@ import * as actionType from '../store/actions';
  * @param {string} key localStorage key to use to retreive value
  */
 export const getLanguage = key => {
-  //debugger
+  debugger
   let l = localStorage.getItem(key);
   if (l){
     return l;
