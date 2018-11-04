@@ -10,11 +10,6 @@ import './About.scss';
 
 class About extends Component {
   /**
-    class flag used to update title
-    only once (avoiding react-redux update loops)
-  */
-  updatedPageTitle = false;
-  /**
    * Return the content for about page body.
    * If loader flag set returnes loader,
    * otherwise loops textSections array and
@@ -61,8 +56,12 @@ class About extends Component {
     })
     //temp loader demo
     //remove in production :-)
+    this.props.dispatch({
+      type:actionType.SHOW_LOADER
+    })
+    //change loader state after 2 seconds
     setTimeout(()=>{
-      //remove loader
+      //hide loader
       this.props.dispatch({
         type:actionType.HIDE_LOADER
       })
@@ -75,15 +74,12 @@ class About extends Component {
       props: this.props
     })
     //update page title in app header component
-    if (this.props.pageTitle && !this.updatedPageTitle){
+    if (this.props.pageTitle){
       //debugger
       this.props.dispatch({
         type: actionType.SET_PAGE_TITLE,
         payload: this.props.pageTitle
       })
-      //debugger
-      //change flag
-      this.updatedPageTitle=true;
     }
   }
 }

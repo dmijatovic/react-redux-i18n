@@ -13,12 +13,11 @@ import * as actionType from '../store/actions';
  */
 import './Home.scss';
 export class Home extends React.Component{
-  showLoader = () =>{
-    if (this.props.loader.show===false){
-      //hide loader
-      this.props.onShowLoader();
-    }
-  }
+  /**
+   * Display content based on loader state.
+   * if loader show we return loader,
+   * otherwise page content with persons
+   */
   getContent=()=>{
      //debugger
      if (this.props.loader.show){
@@ -60,7 +59,7 @@ export class Home extends React.Component{
       props: this.props
     })
     //first show loader
-    this.showLoader()
+    this.props.onShowLoader();
     //change loader state after 2 seconds
     setTimeout(()=>{
       //dispatch action to redux store
