@@ -1,8 +1,7 @@
+@import "../styles/css-variables";
 
-@import '../styles/css-variables';
-
-.page{
-  &-body-header{
+.page {
+  &-body-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -10,11 +9,12 @@
     padding-bottom: 1rem;
     font-size: 1rem;
   }
-  &-body-intro{
+  &-body-intro {
     padding: 1rem;
   }
-  &-content{
-    flex:1;
-    display:flex;
+  &-content {
+    //flex:1;
+    display: flex;
+    min-height: 50rem;
   }
 }

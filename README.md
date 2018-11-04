@@ -28,37 +28,37 @@ This repo uses redux and custom middleware to load json file with translations o
 - **add language option to config** (store/app.cfg.js): add new options item into options object array. Ensure values of data and icon reflecting actual location (excluding static folder name).
 
 ```javascript
-  //---start section of cfg object --
-  i18n:{
-    defaultLang:'en',
-    //localStorage key
-    lsKey:'dv4all.app.lang',
-    //list of languages
-    options:[
-      {
-        key:'en',
-        label:'English',
-        data:'data/en.json',
-        icon:'img/us.svg'
-      },{
-        key:'nl',
-        label:'Dutch',
-        data:'data/nl.json',
-        icon:'img/nl.svg'
-      }
-      /* add new language options here. Ensure values are correct!
-        example new language option:
-          {
-            key:'pl',
-            label:'Polski',
-            data:'data/pl.json',
-            icon:'img/pl.svg'
-          }
-      */
-    ]
-    //... more config here
-  }
-  //---end section of cfg object --
+//---start section of cfg object --
+i18n:{
+  defaultLang:'en',
+  //localStorage key
+  lsKey:'dv4all.app.lang',
+  //list of languages
+  options:[
+    {
+      key:'en',
+      label:'English',
+      data:'data/en.json',
+      icon:'img/us.svg'
+    },{
+      key:'nl',
+      label:'Dutch',
+      data:'data/nl.json',
+      icon:'img/nl.svg'
+    }
+    /* add new language options here. Ensure values are correct!
+      example new language option:
+        {
+          key:'pl',
+          label:'Polski',
+          data:'data/pl.json',
+          icon:'img/pl.svg'
+        }
+    */
+  ]
+  //... more config here
+}
+//---end section of cfg object --
 ```
 
 ### Methods
