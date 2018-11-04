@@ -16,7 +16,7 @@
     "scss"
   ],
   "browserslist": [
-    "> 1%",
+    "> 0.50%",
     "IE > 9"
   ],
   "author": "Dusan Mijatovic, dv4all",
