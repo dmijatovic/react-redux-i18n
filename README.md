@@ -15,15 +15,15 @@ This repo uses redux and custom middleware to load json file with translations o
 
 ### How to add language?
 
-- **create translation file**: create new json file based on the default json file en.json at the same location (static/data/en.json). The filename needs to be defined in the config file (see point 3). Go to google translate and translate all items :-). *Maybe we can use Google Translate API?!? When double-quotes (") appear in the text use escape chart (\\). See example below.*
+- **create translation file**: create new json file based on the default json file en.json at the same location (static/data/en.json). The filename needs to be defined in the config file (see point 3). Go to google translate and translate all items :-). _Maybe we can use Google Translate API?!? When double-quotes (") appear in the text use escape chart (\\). See example below._
 
 ```json
-  {
-    "key":"This text value uses double-quotes \" to quote this text \"."
-  }
+{
+  "key": "This text value uses double-quotes \" to quote this text \"."
+}
 ```
 
-- **add language icon**: the assets folder contains all country flags as of 2018. We use 4x3 format. Copy svg icon into static/img/ folder. Note that location and file name should be provided in config file under *icon* key (see next point).
+- **add language icon**: the assets folder contains all country flags as of 2018. We use 4x3 format. Copy svg icon into static/img/ folder. Note that location and file name should be provided in config file under _icon_ key (see next point).
 
 - **add language option to config** (store/app.cfg.js): add new options item into options object array. Ensure values of data and icon reflecting actual location (excluding static folder name).
 
@@ -59,7 +59,6 @@ This repo uses redux and custom middleware to load json file with translations o
     //... more config here
   }
   //---end section of cfg object --
-
 ```
 
 ### Methods
@@ -82,18 +81,41 @@ To add new page into this project following steps are required
 - **add page to router**: at location `src/router/routes.js` import you page component and extend route definition.
 
 ```javascript
-  //extend routes configuration with your component
-  import NewPage from '../page/NewPage.js'
+//extend routes configuration with your component
+import NewPage from "../page/NewPage.js";
 
-  const routes=[
-  { path:'/', to: "/home", type:"redirect", props:{ exact:true }},
-  { path:'/home', component: HomePage, label:"Home", type:"component",props:{ exact:true }},
-  { path:'/about', component: AboutPage, label:"About", type:"component",props:{ exact:true }},
-  { path:'/error/:id', component: ErrorPage, props:{ exact:true }, type:"component"},
-  { path:'', to:"/error/404", type:"redirect"},
+const routes = [
+  { path: "/", to: "/home", type: "redirect", props: { exact: true } },
+  {
+    path: "/home",
+    component: HomePage,
+    label: "Home",
+    type: "component",
+    props: { exact: true }
+  },
+  {
+    path: "/about",
+    component: AboutPage,
+    label: "About",
+    type: "component",
+    props: { exact: true }
+  },
+  {
+    path: "/error/:id",
+    component: ErrorPage,
+    props: { exact: true },
+    type: "component"
+  },
+  { path: "", to: "/error/404", type: "redirect" },
   //add your new page to router here
-  { path:'/newpage', component: NewPage, label:"New page", type:"component",props:{ exact:true }},
-]
+  {
+    path: "/newpage",
+    component: NewPage,
+    label: "New page",
+    type: "component",
+    props: { exact: true }
+  }
+];
 ```
 
 ## Redux
@@ -101,12 +123,12 @@ To add new page into this project following steps are required
 All redux definitions are in store folder. The index.js file in this folder imports all redux parts and creates a store. Then the store is imported in main index.js file.
 
 ```javascript
-  //index.js
-  //--- start section ---
-  //REDUX
-  import { Provider } from 'react-redux';
-  import appStore from './store';
-  //-- end section --
+//index.js
+//--- start section ---
+//REDUX
+import { Provider } from "react-redux";
+import appStore from "./store";
+//-- end section --
 ```
 
 ### Actions
