@@ -19,7 +19,7 @@ import {
 
 //APP CUSTOM MIDDLEWARE
 import {
-  asyncFetch, actionLogger, getTranslation
+  asyncFetch, actionLogger
 } from './middleware';
 
 //debugger
@@ -36,7 +36,7 @@ const appStore = createStore(
   compose(
     applyMiddleware(
     //NOTE! the middleware order matters
-    actionLogger, asyncFetch, //getTranslation
+    actionLogger, asyncFetch
   ))
 );
 

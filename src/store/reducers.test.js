@@ -9,7 +9,7 @@ describe('Redux-loaderReducer',()=>{
       action={
         //use actionType not covered by this function
         type: actionType.SET_APP_TITLE
-      }, 
+      },
       result = loaderReducer(state, action);
     expect(result).toEqual(state);
   });
@@ -41,7 +41,7 @@ describe('Redux-personReducer',()=>{
 
     expect(resp).toEqual([]);
   });
-  
+
   it('should add person to aray',()=>{
     let action={
       type: actionType.ADD_PERSON,

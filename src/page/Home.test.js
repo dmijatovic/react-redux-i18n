@@ -11,7 +11,8 @@ import { Home } from './Home';
 
 describe('Home',()=>{
   it('should render Home',()=>{
-    const wrapper = shallow(<App loader={()=>{show: true}}/>);
+
+    const wrapper = shallow(<Home loader={()=>{true}}/>);
 
     wrapper.setProps({
       logo: Config.header.logo,

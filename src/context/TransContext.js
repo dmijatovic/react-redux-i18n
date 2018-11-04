@@ -5,6 +5,8 @@ import React, { Component } from 'react';
 import { logGroup } from '../utils';
 import cfg from '../store/app.cfg';
 
+let I18n = React.createContext('test')
+
 class TransContext extends Component {
   state={
     lang:null,
@@ -15,7 +17,7 @@ class TransContext extends Component {
    * or default from store/app.cfg.js
    */
   getLanguage = () => {
-    debugger
+    //debugger
     let l = localStorage.getItem('dv4all.app.lang');
     if (l){
       return l;
@@ -24,7 +26,7 @@ class TransContext extends Component {
     }
   }
   getTranslations = lang => {
-    debugger
+    //debugger
     let lng = cfg.i18n.lang.filter(item => item.key===lang);
 
     if(lng){
@@ -47,9 +49,9 @@ class TransContext extends Component {
     }
   }
   render() {
-    debugger
-    lang = this.getLanguage();
-    data = this.getTranslations(lang);
+    //debugger
+    //let lang = this.getLanguage();
+    //let data = this.getTranslations(lang);
     return (
       <I18n.Provider value={this.state}>
         {this.props.children}
