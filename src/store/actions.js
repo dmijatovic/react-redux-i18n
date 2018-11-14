@@ -24,3 +24,12 @@ export const GET_LANGUAGE = 'GET_LANGUAGE';
 export const SET_LANG_OK = 'SET_LANG_OK';
 export const SET_LANG_ERR = 'SET_LANG_ERR';
 export const SET_LANG_LIST = 'SET_LANG_LIST';
+
+//authentication & user
+
+export const USER_AUTH = 'USER_AUTH';
+export const USER_AUTH_OK = 'USER_AUTH_OK';
+export const USER_AUTH_ERR = 'USER_AUTH_ERR';
+
+export const USER_CRED = 'USER_CRED';
+export const USER_EMAIL = 'USER_EMAIL';

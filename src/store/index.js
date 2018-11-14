@@ -12,9 +12,10 @@ import {
 import {
   loaderReducer,
   headerReducer,
-  languageReducer,
+  i18nReducer,
   personsReducer,
-} from './reducers';
+  userReducer,
+} from './reducer';
 
 //APP CUSTOM MIDDLEWARE
 import { asyncFetch, actionLogger } from './middleware';
@@ -25,7 +26,8 @@ const reducers = combineReducers({
   loader: loaderReducer,
   header: headerReducer,
   persons: personsReducer,
-  i18n: languageReducer,
+  i18n: i18nReducer,
+  user: userReducer,
 });
 
 const appStore = createStore(

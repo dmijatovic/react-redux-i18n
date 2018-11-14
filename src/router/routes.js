@@ -6,6 +6,7 @@
 import HomePage from '../page/Home';
 import AboutPage from '../page/About';
 import ErrorPage from '../page/Error';
+import UserPage from '../page/User';
 
 /**
  * Routes
@@ -38,12 +39,19 @@ const routes = [
     props: { exact: true },
   },
   {
+    path: '/profile',
+    component: UserPage,
+    label: 'Profile',
+    type: 'component',
+    props: { exact: true },
+  },
+  {
     path: '/error/:id',
     component: ErrorPage,
     props: { exact: true },
     type: 'component',
   },
-  { path: '', to: '/error/404', type: 'redirect' },
+  /*{ path: '', to: '/error/404', type: 'redirect' },*/
 ];
 
 export default routes;
